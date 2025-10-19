@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "exportDate": "2025-10-19T15:39:33.890Z",
+  "prompts": [
+    {
+      "content": "echo input",
+      "createdAt": "2025-10-16T15:41:17.215Z",
+      "id": "mgtl7orjknuksy3mub",
+      "name": "echo",
+      "updatedAt": "2025-10-16T15:41:17.215Z"
+    }
+  ],
+  "comblies": [
+    {
+      "createdAt": "2025-10-19T12:21:08.482Z",
+      "id": "mgxodurm5vfoyvzn5xh",
+      "inputSelectors": [
+        {
+          "description": "div .demo-input",
+          "elementType": "div",
+          "isInput": false,
+          "label": "",
+          "placeholder": "",
+          "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1)",
+          "tagName": "div",
+          "textContent": "Input Content: This content will be written to text inputs below",
+          "xpath": "(//div[contains(@class, 'demo-input')])[1]"
+        }
+      ],
+      "isActive": true,
+      "name": "test",
+      "outputSelector": {
+        "description": "textarea #textarea-input \"Textarea:\"",
+        "elementType": "textarea",
+        "isInput": true,
+        "label": "Textarea:",
+        "placeholder": "Multi-line text will appear here...",
+        "selector": "textarea#textarea-input",
+        "tagName": "textarea",
+        "textContent": "Multi-line text will appear here...",
+        "xpath": "//textarea[@name=\"textarea-input\"]"
+      },
+      "pageDomain": "localhost",
+      "pageOrigin": "http://localhost:5501",
+      "promptId": "mgtl7orjknuksy3mub",
+      "updatedAt": "2025-10-19T12:21:08.482Z"
+    }
+  ],
+  "combos": [
+    {
+      "comblieIds": [
+        "mgxodurm5vfoyvzn5xh"
+      ],
+      "createdAt": "2025-10-19T12:21:19.714Z",
+      "executionOrder": [
+        0
+      ],
+      "id": "mgxoe3fmuzxx3clgou",
+      "isActive": true,
+      "name": "combo test",
+      "pageDomain": "localhost",
+      "pageOrigin": "http://localhost:5501",
+      "updatedAt": "2025-10-19T12:21:19.714Z"
+    }
+  ],
+  "workflows": [
+    {
+      "connections": [
+        {
+          "connectionType": "direct",
+          "sourceElementId": "input-1",
+          "targetElementId": "process-2"
+        },
+        {
+          "connectionType": "direct",
+          "sourceElementId": "process-2",
+          "targetElementId": "output-3"
+        }
+      ],
+      "createdAt": "2025-10-19T12:22:22.692Z",
+      "description": "",
+      "elements": [
+        {
+          "id": "input-1",
+          "inputConnections": [],
+          "inputSelector": {
+            "description": "div .demo-input",
+            "elementType": "div",
+            "isInput": false,
+            "label": "",
+            "placeholder": "",
+            "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1)",
+            "tagName": "div",
+            "textContent": "Input Content: This content will be written to text inputs below",
+            "xpath": "(//div[contains(@class, 'demo-input')])[1]"
+          },
+          "name": "Input 1",
+          "position": {
+            "x": 46.28891264121944,
+            "y": -90.44860356933614
+          },
+          "systemPrompt": "",
+          "type": "input",
+          "userPrompt": ""
+        },
+        {
+          "id": "process-2",
+          "inputConnections": [],
+          "name": "Process 2",
+          "position": {
+            "x": 259.0151626220818,
+            "y": -124.37738081626105
+          },
+          "promptId": "mgtl7orjknuksy3mub",
+          "systemPrompt": "",
+          "type": "prompt",
+          "userPrompt": "echo input"
+        },
+        {
+          "id": "output-3",
+          "inputConnections": [],
+          "name": "Output 3",
+          "outputConfig": null,
+          "outputSelector": {
+            "description": "textarea #textarea-input \"Textarea:\"",
+            "elementType": "textarea",
+            "isInput": true,
+            "label": "Textarea:",
+            "placeholder": "Multi-line text will appear here...",
+            "selector": "textarea#textarea-input",
+            "tagName": "textarea",
+            "textContent": "This content will be written to text inputs below",
+            "xpath": "//textarea[@name=\"textarea-input\"]"
+          },
+          "position": {
+            "x": 557.7810877176837,
+            "y": -56.16579867542458
+          },
+          "systemPrompt": "",
+          "type": "output",
+          "userPrompt": ""
+        }
+      ],
+      "id": "mgxofg109vda9ra125k",
+      "isActive": true,
+      "name": "test workflow",
+      "pageDomain": "localhost",
+      "pageOrigin": "http://localhost:5501",
+      "updatedAt": "2025-10-19T12:25:41.160Z"
+    }
+  ]
+}
