@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "exportDate": "2025-10-19T17:39:02.228Z",
+  "prompts": [
+    {
+      "content": "echo input",
+      "createdAt": "2025-10-19T17:36:46.682Z",
+      "id": "mgxznrkqb2p475h1os5",
+      "name": "johan echo",
+      "updatedAt": "2025-10-19T17:38:05.458Z"
+    }
+  ],
+  "comblies": [
+    {
+      "createdAt": "2025-10-19T17:37:09.382Z",
+      "id": "mgxzo93afs4kdxupknb",
+      "inputSelectors": [
+        {
+          "description": "div .demo-input",
+          "elementType": "div",
+          "isInput": false,
+          "label": "",
+          "placeholder": "",
+          "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1)",
+          "tagName": "div",
+          "textContent": "Input Content: This content will be written to text inputs below",
+          "xpath": "(//div[contains(@class, 'demo-input')])[1]"
+        }
+      ],
+      "isActive": true,
+      "name": "johan comblie",
+      "outputSelector": {
+        "description": "textarea #textarea-input \"Textarea:\"",
+        "elementType": "textarea",
+        "isInput": true,
+        "label": "Textarea:",
+        "placeholder": "Multi-line text will appear here...",
+        "selector": "textarea#textarea-input",
+        "tagName": "textarea",
+        "textContent": "Multi-line text will appear here...",
+        "xpath": "//textarea[@name=\"textarea-input\"]"
+      },
+      "pageDomain": "localhost",
+      "pageOrigin": "http://localhost:5501",
+      "promptId": "mgxznrkqb2p475h1os5",
+      "updatedAt": "2025-10-19T17:37:09.382Z"
+    }
+  ],
+  "combos": [
+    {
+      "comblieIds": [
+        "mgxzo93afs4kdxupknb"
+      ],
+      "createdAt": "2025-10-19T17:37:20.885Z",
+      "executionOrder": [
+        0
+      ],
+      "id": "mgxzohytb2iprghkhg",
+      "isActive": true,
+      "name": "johan combo",
+      "pageDomain": "localhost",
+      "pageOrigin": "http://localhost:5501",
+      "updatedAt": "2025-10-19T17:37:20.885Z"
+    }
+  ],
+  "workflows": [
+    {
+      "connections": [
+        {
+          "connectionType": "direct",
+          "sourceElementId": "process-2",
+          "targetElementId": "output-3"
+        },
+        {
+          "connectionType": "direct",
+          "sourceElementId": "input-1",
+          "targetElementId": "process-2"
+        }
+      ],
+      "createdAt": "2025-10-19T17:37:54.257Z",
+      "description": "",
+      "elements": [
+        {
+          "id": "input-1",
+          "inputConnections": [],
+          "inputSelector": {
+            "description": "div .demo-input",
+            "elementType": "div",
+            "isInput": false,
+            "label": "",
+            "placeholder": "",
+            "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1)",
+            "tagName": "div",
+            "textContent": "Input Content: This content will be written to text inputs below",
+            "xpath": "(//div[contains(@class, 'demo-input')])[1]"
+          },
+          "name": "Input 1",
+          "position": {
+            "x": 1.88810348566858,
+            "y": 100
+          },
+          "systemPrompt": "",
+          "type": "input",
+          "userPrompt": ""
+        },
+        {
+          "id": "process-2",
+          "inputConnections": [],
+          "name": "Process 2",
+          "position": {
+            "x": 205.84964656855072,
+            "y": 100
+          },
+          "promptId": "mgxznrkqb2p475h1os5",
+          "systemPrompt": "",
+          "type": "prompt",
+          "userPrompt": "echo input"
+        },
+        {
+          "id": "output-3",
+          "inputConnections": [],
+          "name": "Output 3",
+          "outputConfig": {
+            "type": "popup"
+          },
+          "outputSelector": null,
+          "position": {
+            "x": 533.281912826925,
+            "y": 103.30451023537836
+          },
+          "systemPrompt": "",
+          "type": "output",
+          "userPrompt": ""
+        }
+      ],
+      "id": "mgxzp7pt516a80mowbu",
+      "isActive": true,
+      "name": "johan workflow",
+      "pageDomain": "localhost",
+      "pageOrigin": "http://localhost:5501",
+      "updatedAt": "2025-10-19T17:37:54.257Z"
+    }
+  ]
+}
