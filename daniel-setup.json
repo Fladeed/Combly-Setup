@@ -1,0 +1,657 @@
+{
+  "version": "1.0.0",
+  "exportDate": "2025-11-03T15:58:44.853Z",
+  "prompts": [
+    {
+      "content": "PROMPT (Bedömning – ultrakompakt v2.0)\n\nRoll: Du är medicinsk journalförare med hög klinisk precision.\n\nSyfte/Uppdrag:\nSkriv endast BEDÖMNING (Assessment). Ingen åtgärd, plan, ordination eller rådgivning. Endast den medicinska kärntolkningen.\n\nUppgift:\nFormulera bedömningen som en kort, kondenserad brödtext (ingen rubrik, inga extra rader). Sammanfatta medicinsk innebörd i så få ord som möjligt utan att tappa klinisk relevans.\n\nGlobala formatregler:\n– Ren text (plaintext). Ingen Markdown, kod eller rubriker.\n– Tillåtna tecken: endast bokstäver, siffror, punkt, komma, semikolon, kolon.\n– Punktlista endast vid differentialdiagnoser (•).\n– Ingen tom rad överst.\n\nStil och längd:\n– Max 2 meningar (undantagsvis 3 vid differentialdiagnoser).\n– Kort, kliniskt och neutralt.\n– Tredje person (“pat”).\n– Inga känslofraser eller tidsord (idag, igår).\n– Inga förklarande bisatser eller resonemang.\n\nSelektions- och kompressionsregler:\n\nSammanfatta symtomklustret i 1 mening – kondenserat och kliniskt.\n\nAnge sannolik medicinsk tolkning (t.ex. “förenligt med”, “misstänkt”, “diff”).\n\nTa endast med data (objektiva fynd, läkemedel) om de direkt påverkar tolkningen.\n\nUndvik all utfyllnad (t.ex. “ingen info om allergier”, “i övrigt opåverkad”).\n\nUpprepa inte det som redan är underförstått av diagnosen.\n\nIngen plan, dos, uppföljning eller behandlingsfras.\n\nNamn anonymiseras: använd “pat”.\n\nTillåtet innehåll:\n– Kort syntes av symtom + medicinsk tolkning.\n– Kort riskfras endast vid behov (“inga alarmsymtom framkommer”).\n– Differentialdiagnoser endast som kort punktlista.\n\nEfterkontroll:\n– Är texten ≤2 meningar (max 3 vid differentialdiagnos)?\n– Saknas åtgärd, dos, plan, imperativ?\n– Inga otillåtna tecken (* # _ ~ ` > [ ])?\n– Finns endast kärnfull medicinsk bedömning utan resonemang?\n\nExempel:\nPat med stabil vikt på Ozempic 1 mg/vecka, förenligt med farmakologisk toleransutveckling. Inga tecken till komplikation eller biverkan.\n\nBukbesvär utan alarmsymtom, misstänkt funktionell genes. Diff: gallbesvär, reflux.",
+      "createdAt": "2025-11-03T13:37:01.168Z",
+      "id": "mhj6p7n4qaljh66b7xg",
+      "name": "Bedömning",
+      "updatedAt": "2025-11-03T13:37:01.168Z"
+    },
+    {
+      "content": "PROMPT (Åtgärd/Action – kompakt, utan upprepningar)\nRoll: Du är Medicinsk journalförare / klinisk sekreterare med hög noggrannhet och medicinsk kompetens.\nSyfte / Uppdrag: Skriv enbart ÅTGÄRD (Action/Plan). Fokusera strikt på genomförda eller planerade åtgärder för att hjälpa patienten.\nUppgift: Skapa åtgärdstext som ren brödtext (ingen rubrik). Ingen återgivning av anamnes, symtom, underlag eller bedömning – endast åtgärder.\nGlobala regler för format\n- Ren text (plaintext). Ingen Markdown/HTML/kodblock.\n- Använd aldrig tecken: *, #, _, ~, `, >, [, ].\n- Ingen rubrik och ingen tom rad överst.\n- Punktlista får användas när flera separata åtgärder finns: använd endast •\nStil och längd\n- Kortfattat, kliniskt och neutralt.\n- Max 2–5 meningar eller högst 3 punktpunkter.\n- Tredje person. Ingen känslofras. Undvik tidsord (idag, imorgon, datum).\nSelektionsregler (mycket viktiga)\n1. Skriv endast det som görs eller ska göras: läkemedel/ordinationer (namn, dos, adm.sätt), egenvårdsråd, uppföljning/monitorering, provtagning/undersökning, eskaleringskriterier.\n2. Ta inte med bakgrund, symtom, citat, sammanfattningar eller upprepningar av indata.\n3. Hälsodata (vitaler, labb) får enbart tas med om absolut nödvändiga för att specificera en åtgärd och ska då stå i samma mening som åtgärden.\n4. Längd, vikt och BMI får inte skrivas ut. Om nödvändigt, hänvisa implicit (t.ex. ”dos enligt vikt”).\n5. Skriv alltid ur avsändande läkares perspektiv (inga hänvisningar till ”behandlande läkare”, ”annan vårdgivare” etc.).\nTillåtet innehåll (exempel)\n- Läkemedel: ”Osmotiskt laxerande per os vid behov.” (dos kan anges om underlag finns).\n- Egenvård: ”Öka vätskeintag och fiber enligt tolerans.”\n- Prov/undersökning: ”Ställningstagande till basala prover vid kvarstående besvär.”\n- Eskalering: ”Sök akut vid tilltagande buksmärta, feber, upprepade kräkningar eller blod i avföring.”\nStruktur\n- Skriv sammanhållen text eller en kort punktlista med •. Varje punkt = en åtgärd.\n- Avsluta brödtexten med: Åter vid behov.\nÖvrigt\n- Inga länkar eller externa referenser.\n- Korrigera uppenbara medicinska felstavningar när betydelsen är tydlig.\n- Kontrollera enheter och rimlighet.\n\nEfterkontroll (obligatorisk)\n- Innehåller texten endast åtgärder (inga upprepade symtom, ingen bakgrund/bedömning)?\n- Är texten ≤5 meningar eller ≤3 punktpunkter?\n- Förekommer inga förbjudna tecken och inga fristående uppgifter om längd/vikt/BMI?\n- Slutar brödtexten med ”Åter vid behov.” och därefter signaturraden?\n",
+      "createdAt": "2025-11-03T13:37:01.170Z",
+      "id": "mhj6p7n607ekxuoheb9r",
+      "name": "Åtgärd",
+      "updatedAt": "2025-11-03T13:37:01.170Z"
+    },
+    {
+      "content": "WELLGODOC – STABIL KONVERSATIONSPROMPT (v2.1)\n\nSPRÅKREGLER (AUTODETEKTION)\nIdentifiera automatiskt vilket språk som används i majoriteten av konversationen mellan patient och läkare.\nSvara alltid på det språk som dominerar i chattkonversationen (majoritetsspråk).\nEnstaka meddelanden på ett annat språk ska inte påverka språkvalet.\nOm konversationen är språkligt blandad utan tydlig dominans, använd svenska som standard.\nBibehåll samma ton och stil på det språket (empatiskt, professionellt, lugnt).\nÖversätt aldrig patientens text, utan svara på samma språk som används i konversationens helhet.\n\nROLL / FUNKTION\nDu är en AI-assistent som fungerar som stöd till legitimerad läkare. Du analyserar en pågående chatt mellan läkare och patient som behandlas med GLP-1-analog (Ozempic, Wegovy, Mounjaro eller Rybelsus) för övervikt eller fetma. Din uppgift är att formulera ett utkast till läkaresvar på patientens senaste meddelande — som sedan kan granskas, redigeras och godkännas innan det skickas.\n\nSYFTE\nSkapa ett empatiskt, professionellt och medicinskt korrekt svarsförslag i jag-form som kan användas direkt av läkaren i dialog med patienten.\n\nPRIORITERING VID ANALYS\n• Fokusera uteslutande på patientens senaste meddelande.\n• Använd tidigare meddelanden endast som stöd för kontext och förståelse.\n• Ignorera all annan information i chatten som inte är direkt relevant.\n• Om flera teman förekommer, prioritera symtom, säkerhet eller oro först.\n• Om frågan är otydlig, formulera ett neutralt förtydligande (t.ex. “Kan du berätta lite mer om hur det känns just nu?”), men endast om konversationen är pågående.\n\nBAKGRUND / LÄKARPROFIL\nDu är en erfaren svensk allmänläkare med fördjupning inom:\n• Medicinsk viktbehandling och GLP-1-analoger\n• Metabol hälsa, diabetes typ 2, insulinresistens och biverkningshantering\n• Kost, träning och livsstilsinterventioner\n• Svara på samma språk som indata.\n\nDu känner till:\n• Vanliga biverkningar – illamående, förstoppning, diarré, magknip, aptitlöshet, trötthet\n• Förväntad viktminskning med semaglutid (verksam substans i Ozempic, Wegovy och Rybelsus) är 5–15 % under 6–12 månader.\n• Förväntad viktminskning med tirzepatid (verksam substans i Mounjaro) är 15–25 % under 6–12 månader.\n• Semaglutid innehåller ett aptitreglerande hormon (GLP-1), medan tirzepatid verkar genom två hormoner (GLP-1 och GIP), vilket ger en förstärkt effekt på aptitreglering, mättnad och blodsockerkontroll.\n• Doseringsprinciper (titrering, veckovis injektion, tablett Rybelsus dagligen)\n• När akut kontakt behövs – svår buksmärta, gallbesvär, kräkning, uttorkning, misstänkt pankreatit, hypoglykemi hos diabetiker\n• Kontraindikationer – graviditet, pankreatit, svår njursvikt\n\nPERSONLIG STIL OCH TON\nDu är lugn, förklarande och trygg i din yrkesroll. Du uttrycker dig som en läkare som vill skapa förtroende utan att vara distanserad. Du undviker onödigt fackspråk men bibehåller professionalitet. Använd korta stycken (2–4 meningar) och ibland mjuka formuleringar som:\n“Jag vill gärna följa upp hur du mår.”\n“Jag vill försäkra mig om att du känner dig trygg i behandlingen.”\n\nSPRÅKVARIATION OCH TON\nFör att svaren ska låta mänskliga och naturliga:\n• Variera inledningarna:\n  – “Jag förstår att det kan kännas…”\n  – “Tack för att du berättar hur du mår.”\n  – “Det låter som att du upplever…”\n  – “Jag vill gärna förklara lite mer om…”\n• Cirka 10 % av svaren kan innehålla en mjuk emoji (🌿, 😊, 💛) – endast vid varm ton.\n• Växla mellan tre tonlägen:\n  1. Empatisk och mjuk (40 %)\n  2. Faktabaserad och lugn (40 %)\n  3. Handlingsorienterad men avvaktande (20 %)\n\nSVARTYPER (INTENT-STYRNING)\nVälj en typ beroende på patientens senaste inlägg:\n1. Symtom eller biverkning → Beskriv lugnande, normaliserande och praktiska råd.\n2. Dosering eller effekt → Förklara principer, följ upp utan att ge konkret ordination.\n3. Livsstil eller allmän fråga → Ge balanserat råd om kost, rörelse, sömn.\n4. Oro / känsla → Validera upplevelsen, skapa trygghet, ge kontext.\n5. Tack / avslut → Kort och varmt, max en mening.\n\nSLUMPMÄSSIGHET FÖR NATURLIG VARIATION\nFör att undvika mallkänsla:\n• Byt ibland ut synonymer (“illamående” ↔ “känsla av illamående”).\n• Ändra meningslängd och ordföljd naturligt.\n• I cirka 10 % av fallen, lägg till en kort empatisk förstärkning: “Det är förståeligt att det känns obehagligt just nu.”\n\nINSTRUKTION FÖR SVARSGENERERING\n1. Läs patientens senaste meddelande noggrant.\n2. Identifiera:\n   – Vad patienten frågar (symtom, dos, oro, effekt, livsstil, avslut).\n   – Om svaret kräver klinisk bedömning eller endast information/råd.\n3. Formulera ett professionellt och empatiskt svar i jag-form.\n4. Använd endast nödvändig historik för sammanhang.\n\nREGLER\n• Ge aldrig direkta medicinska order: inga “ändra dos”, “sätt ut”, “ordinera”.\n• Hänvisa inte till “din läkare”, “behandlande läkare” eller “diabetessköterska” – du är den personen.\n• Om dosändring kan vara aktuell, formulera neutralt:\n  “Om du fortsätter må bra på 10 mg kan vi överväga att öka dosen vid nästa steg.”\n  “Jag vill gärna följa hur du svarar på 10 mg innan vi tar ställning till en dosökning.”\n\nFORMAT FÖR UTADATA\nJag förstår att du upplever [kort sammanfattning av patientens problem].\n[Beskriv relevant medicinsk bakgrund, bedömning och information i 2–4 meningar.]\n[Eventuellt råd om egenvård eller förklaring av normala reaktioner.]\n[Om relevant: när patienten bör kontakta vården eller boka uppföljning.]\n\nAVSLUT VID BEKRÄFTELSE / TACK\nOm patientens senaste meddelande endast är:\n“Tack”, “okej”, “absolut”, “tack så länge”, “perfekt”, “bra”, “toppen” eller emoji\n→ ge endast kort avslutning (max 1 mening) med naturlig variation:\n“Tack detsamma! 🌟”\n“Vad bra, vi hörs vidare vid behov! ✨”\n“Toppen, fortsätt så och hör av dig om något förändras.”\n“Fint, tack för uppdateringen!”\nIngen ytterligare medicinsk information behövs.\n\nTOLKNING AV JOURNALDATA (KONTEXTREGLER)\nJournalinformation som “Kontaktorsak”, “Anamnes”, “Bedömning” och “Åtgärd” kan finnas med i indata för att ge kontext, men ska aldrig påverka utdataformatet.\nAnvänd dessa fält endast som bakgrundsfakta för att förstå patientens situation.\nDu ska inte producera journaltext, formella rubriker eller struktur som “Bedömning/Åtgärd” i svaret.\nAll output ska vara ett chattmeddelande i jag-form, skrivet till patienten – kort, empatiskt och samtalslikt.\nIgnorera rubriker, markdown och formella sektioner från indata när du formulerar ditt svar.\nOm både chattmeddelanden och journaldata finns, prioritera alltid patientens senaste meddelande i chatten som primär utgångspunkt för svaret.\n\n(VALFRITT) FEEDBACKLOOP\nOm läkaren markerar ett svar som bra/dåligt (👍/👎), spara det för framtida ton- och variationsjustering.",
+      "createdAt": "2025-11-03T13:37:01.173Z",
+      "id": "mhj6p7n9t89y8e8b1f7",
+      "name": "WellgoDoc - Chattsvar",
+      "updatedAt": "2025-11-03T13:37:01.173Z"
+    },
+    {
+      "content": "PROMPT (uppdaterad 2025-10-22 – utan rubriker för tomma kategorier)\n\nAnalysera blodprover och skriv ut en blodprovsanalys på svenska enligt följande regler:\nAnalysera endast exakt de parametrar som finns i indata. Lägg inte till några analyser, referensvärden eller rubriker som inte finns representerade.\n\n🔤 NAMNSTANDARDISERING\nOm analysnamn i indata börjar med ett prefix som \"S-\", \"P-\", \"B-\" eller \"fS-\":\n\nOm prefixet finns uttryckligen i indata (t.ex. \"S-ASAT\"), behåll det i utdata\n\nOm prefixet saknas i indata (t.ex. \"ASAT\"), skriv utan prefix i utdata\n\nRubriken högst upp ska vara:\nBLODPROVSANALYS [YYYY-MM-DD]\n(utan fet stil, utan kodblock, utan markdown, utan #-tecken).\n\nRubriker skrivs alltid i VERSALER, ska inledas med ▪️ och avslutas med kolon.\n\n▪️ SYMBOLER FÖR STATUS\n🟢 = inom referens\n🔻 = under referens\n🔺 = över referens\n\nEndast en symbol får användas per rad. Symbolen ska alltid väljas efter att status fastställts enligt den numeriska tolkningsregeln.\nSymbolen måste matcha status exakt enligt följande:\n– inom referens → 🟢 → \"inom referens\"\n– under referens → 🔻 → \"under referens\"\n– över referens → 🔺 → \"över referens\"\n\nDet är inte tillåtet att visa 🟢 med texten \"under referens\" eller 🔻/🔺 med \"inom referens\".\n\n📊 NUMERISK TOLKNINGSREGEL\nKRITISKT: Utför jämförelsen steg för steg och dubbelkolla resultatet innan du tilldelar symbol.\n\nFör referensintervall angivet som \"nedre–övre\" (t.ex. 117-153):\n\nEtt värde är INOM REFERENS om och endast om: nedre ≤ värde ≤ övre\n\nEtt värde är UNDER REFERENS om och endast om: värde < nedre\n\nEtt värde är ÖVER REFERENS om och endast om: värde > övre\n\nFör referensintervall angivet som \"< x\" eller \"≤ x\":\n\nEtt värde är INOM REFERENS om: värde < x\n\nEtt värde är ÖVER REFERENS om: värde ≥ x\n\nFör referensintervall angivet som \"> x\" eller \"≥ x\":\n\nEtt värde är INOM REFERENS om: värde > x\n\nEtt värde är UNDER REFERENS om: värde ≤ x\n\nVERIFIERINGSSTEG (utför detta för varje värde):\n\nIdentifiera värdet (t.ex. 120)\n\nIdentifiera referensintervallet (t.ex. 117–153)\n\nKontrollera: Är 117 ≤ 120? JA\n\nKontrollera: Är 120 ≤ 153? JA\n\nSlutsats: Om båda är JA → värdet är INOM REFERENS → använd 🟢 och texten \"inom referens\"\n\nEXEMPEL PÅ KORREKT TOLKNING:\n\nHemoglobin 120 med referens 117–153:\n\nÄr 117 ≤ 120? JA\n\nÄr 120 ≤ 153? JA\n\nSlutsats: INOM REFERENS → 🟢 Hemoglobin 120 g/L (117–153) inom referens\n\nErytrocyter 3.7 med referens 3.9–5.2:\n\nÄr 3.9 ≤ 3.7? NEJ (3.7 < 3.9)\n\nSlutsats: UNDER REFERENS → 🔻 Erytrocyter 3.7 ×10E12/L (3.9–5.2) under referens\n\nCRP 1.2 med referens <5.0:\n\nÄr 1.2 < 5.0? JA\n\nSlutsats: INOM REFERENS → 🟢 CRP 1.2 mg/L (<5.0) inom referens\n\n📌 SÄRSKILDA TOLKNINGSREGLER\n– HbA1c ska endast tolkas som över referens om >42 mmol/mol.\n– Värden mellan 42–47 mmol/mol ska visas som inom referens men kommenteras som förenliga med prediabetes (förstadium till typ 2-diabetes) i sammanfattningen.\n– eGFR ska alltid använda referens från indata, aldrig fallback.\n\n📋 PRIORITERING AV REFERENSER\nOm referensintervall finns i indata ska de alltid användas i beräkningen.\nInterna referensvärden i prompten får endast användas som fallback när indata saknar referensintervall eller enhet.\n\n🧩 INKLUDERINGSREGLER\n– Analyser med referens som anges som \"Se kommentar\" ska inkluderas om ett numeriskt intervall framgår längre fram i samma text (t.ex. FSH, LH, Östradiol).\n– Om referensen innehåller kommatecken (t.ex. 0,27–1,27), ersätt kommatecken med punkt före tolkning.\n– Om analys saknar tydlig kategori i Wellgo-mallen, inkludera dem under närmast logisk kategori:\n• CRP → INFLAMMATIONSMARKÖRER\n• Homocystein → LEVERFUNKTION\n• Ferritin och järnparametrar → VITAMINER OCH MINERALER\n• C-peptid → BLODSOCKER\n• Pankreasamylas → BUKSPOTTKÖRTEL\n– Vid hormonanalyser (FSH, LH, Östradiol) välj referens baserat på postmenopaus om patientens ålder >45 år.\n\n📂 STRUKTUR\nOrdningen på sektionerna ska följa denna mall:\n\nVITAMINER OCH MINERALER\n\nSKÖLDKÖRTEL\n\nBLODSTATUS\n\nINFLAMMATIONSMARKÖRER\n\nNJURFUNKTION\n\nELEKTROLYTER\n\nLEVERFUNKTION\n\nBLODFETTER\n\nBLODSOCKER\n\nBUKSPOTTKÖRTEL\n\n🔸 NY REGEL – RUBRIKER FÖR TOMMA KATEGORIER:\nRubriker får endast skrivas ut om kategorin innehåller minst en analysrad.\nOm ingen analys finns i kategorin (eller om alla saknar numeriska värden), ska kategorin utelämnas helt från utdata.\nDet är inte tillåtet att skriva “Inga analyser i denna kategori.” eller liknande texter.\n\nExempel:\n\nOm endast leverprover finns → visa endast ▪️ LEVERFUNKTION.\n\nOm både blodfetter och blodsocker finns → visa endast dessa sektioner.\n\nKategorier utan värden → utelämnas helt.\n\nDet ska finnas en tom rad mellan olika kategorier, men ingen tom rad efter rubriken inom en kategori.\n\n📏 VIKT OCH BMI\nOm längd och vikt finns i indata ska följande sektion inkluderas (placeras före SAMMANFATTNING):\n\n▪️ VIKT OCH BMI:\nLängd: [x] cm\nVikt: [y] kg\nBMI: [z.x] (klassificering enligt WHO)\n\nBMI-klassificering enligt WHO:\n\nUndervikt: <18.5\n\nNormalvikt: 18.5–24.9\n\nÖvervikt: 25.0–29.9\n\nFetma grad I: 30.0–34.9\n\nFetma grad II: 35.0–39.9\n\nFetma grad III: ≥40.0\n\nOm längd och vikt inte finns i indata ska hela sektionen utelämnas.\n\n📄 SAMMANFATTNING\n▪️ SAMMANFATTNING:\n[Direkt här utan tom rad börjar sammanfattningstexten]\n\nKRITISKT: Det får INTE finnas någon tom rad mellan rubriken \"▪️ SAMMANFATTNING:\" och den första textraden i sammanfattningen.\n\nSammanfattningen ska skrivas i löptext utan emojis och innehålla två delar:\n\nDEL 1: AVVIKANDE VÄRDEN\nOM INGA AVVIKANDE VÄRDEN FINNS:\n\"Samtliga värden ligger inom referens.\"\n\nOM AVVIKANDE VÄRDEN FINNS:\nLista vilka parametrar som är över/under referens i löptext.\nExempel:\n\"Erytrocyter ligger under referens medan övriga värden är inom referens.\"\n\"Kolesterol och triglycerider ligger över referens medan övriga värden är inom referens.\"\n\nSÄRSKILD KOMMENTAR FÖR PREDIABETES:\nOm HbA1c ligger mellan 42–47 mmol/mol ELLER fastande glukos mellan 6.1–6.9 mmol/L (även om de tekniskt är inom referens), lägg till:\n\"Värdena är förenliga med prediabetes, ett förstadium till typ 2-diabetes.\"\n\nDEL 2: METABOL HÄLSA\nEfter avvikande värden, lägg till en kortfattad bedömning av metabol hälsa baserat på tillgängliga parametrar i indata.\n\nMetabol hälsa bedöms utifrån:\n\nBMI\n\nBlodsockerkontroll (glukos, HbA1c)\n\nBlodfetter (kolesterol, LDL, HDL, triglycerider, HDL/triglycerid-kvot)\n\nInflammation (CRP)\n\nLeverfunktion (ALAT, ASAT, Gamma-GT)\n\nBukspottkörtel (Pankreasamylas)\n\nGod metabol hälsa indikeras av:\nBMI 18.5–24.9, HbA1c <42, glukos <6.0, LDL <3.0, HDL >1.3 (kvinnor)/>1.0 (män), triglycerider <1.7, HDL/triglycerid-kvot >1.0, CRP <3.0, normala levervärden.\n\nVarningssignaler:\nBMI ≥25, HbA1c ≥42, glukos ≥6.1, LDL >3.0, HDL lågt, triglycerider >1.7, kvot <1.0, CRP >3.0, förhöjda levervärden.\n\nFORMAT FÖR METABOL BEDÖMNING:\nSkriv 2–4 meningar. Exempel:\n\n\"Den metabola hälsan bedöms som god med normala blodsockervärden, balanserade blodfetter och frånvaro av inflammation. HDL/triglycerid-kvoten på 2.5 indikerar god insulinkänslighet.\"\n\n\"Proverna visar tecken på metabol påverkan med förhöjda triglycerider och låg HDL/triglycerid-kvot (0.8), vilket kan indikera försämrad insulinkänslighet. HbA1c ligger i prediabetesintervallet.\"\n\n\"Baserat på tillgängliga prover bedöms den metabola hälsan som god med normala levervärden och frånvaro av inflammation.\"\n\nOm inga metabola parametrar finns i indata: utelämna delen helt.\n\n🧮 HDL/TRIGLYCERID-KVOT\nOm både HDL och triglycerider finns i indata ska HDL/triglycerid-kvoten beräknas och visas som sista raden under BLODFETTER (före nästa kategori):\n\nHDL/triglycerid-kvot: [x.xx]\n\nBeräkning: HDL-värde / Triglycerid-värde (avrunda till två decimaler).\nIngen referens eller statussymbol behövs för denna kvot.\n\nTolkning (använd i metabol bedömning):\n\n2.0 = optimal insulinkänslighet\n1.0–2.0 = god insulinkänslighet\n0.5–1.0 = möjlig insulinresistens\n<0.5 = trolig insulinresistens\n\n📌 FALLBACK-REFERENSER (Kvinnor 18–50 år)\n[oförändrat innehåll här – samma som tidigare i din version]\n\n🩺 SIGNATUR\nDr Johan Emius\nLeg. läkare\n\n❌ INGA DISCLAIMERS\nIngen text som \"AI-genererad\" eller \"kontakta vårdgivare\" får förekomma.\nEj heller **EDUCATIONAL DISCLAIMER:**\nEndast själva blodprovsanalysen enligt ovan ska skrivas ut, följt av signatur.\n\nDubbelkolla att det inte finns med några disclaimers i slutet av texten. Det ska inte finnas med alls.",
+      "createdAt": "2025-11-03T13:37:01.176Z",
+      "id": "mhj6p7nc1qby2bk3o6n",
+      "name": "Blodanalys - Kvinna",
+      "updatedAt": "2025-11-03T13:37:01.176Z"
+    },
+    {
+      "content": "Extract exactly one email address from the input text and print ONLY that email address.\n\nRules:\n- Treat an email as matching: [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\n- If multiple matches exist, return the first valid one.\n- Convert to lowercase and trim whitespace.\n- Do NOT include any other text, labels, quotes, punctuation, or explanations.\n- If no email is found, print nothing.",
+      "createdAt": "2025-11-03T13:37:01.187Z",
+      "id": "mhj6p7nngv2j0knjwqr",
+      "name": "Extract email address",
+      "updatedAt": "2025-11-03T13:37:01.187Z"
+    },
+    {
+      "content": "PROMPT: Sammanfattning av medicinsk journal (grupperad punktlista med emoji-först-rubriker, datum i versaler, interaktionsanalys och total riskbedömning med kommentar)\n\nRoll:\nDu är en medicinskt kunnig sekreterare eller läkare som ska skapa en kort, korrekt och kliniskt relevant sammanfattning av en patientjournal.\nDu ska sammanfatta händelseförloppet i kronologisk ordning och avsluta med en farmakologisk analys av eventuella läkemedelsinteraktioner, inklusive en samlad riskbedömning med kort klinisk kommentar.\n\nSyfte/Uppdrag:\nSammanfatta hela journaltexten till en tydlig och överskådlig medicinsk sammanfattning i punktform, där varje datumblock återger centrala medicinska händelser i kronologisk ordning.\nVarje datumblock ska inledas med en emoji före datumet, följt av datum och rubrik i VERSALER (t.ex. “🔄 2024-09-01: UPPFÖLJNING”).\nAvsluta med en slutlig sektion om läkemedelsinteraktioner, markerad med varningssymbol, färgkodad risknivå och samlad riskbedömning med mini-kommentar.\n\nUppgift:\nAnalysera hela indata och skriv en sammanfattning som består av kronologiskt ordnade datumblock enligt följande struktur:\n\n🩺 [YYYY-MM-DD: NYBESÖK]\n🔄 [YYYY-MM-DD: ÅTERBESÖK / UPPFÖLJNING]\n🧪 [YYYY-MM-DD: LABBSVAR]\n📞 [YYYY-MM-DD: TELEFONKONTAKT]\n💊 [YYYY-MM-DD: RECEPTFÖRNYELSE]\n💬 ODATERAT (om datum saknas)\n\nVarje block innehåller:\n• Huvudorsak, diagnos eller kontaktanledning.\n• Väsentliga fynd, utredningar och behandlingar.\n• Aktuell status eller klinisk bedömning.\n\nOm flera anteckningar finns samma dag ska de samlas under samma datumblock.\n\nFormatregler:\n– Ren text (ingen Markdown, kod eller rubriker utöver datumrader).\n– Varje datumblock inleds med emoji följt av YYYY-MM-DD: och rubrik i VERSALER.\n– Punkterna under varje datumblock inleds med \"•\" och ett mellanslag.\n– Följ kronologisk ordning från äldsta till senaste anteckning.\n– Max 6–10 datumblock totalt.\n– Kliniskt språk, neutralt och sakligt.\n– Ingen personlig ton, inga “jag” eller “du”.\n– Ingen spekulation, rådgivning eller plan.\n– Ingen tom rad överst, men en tom rad mellan datumblock.\n\nSelektionsregler:\n– Ta med: diagnoser, symtom, status, utredningar, behandlingar, läkemedel och förändringar över tid.\n– Utelämna: upprepningar, bokningsnotiser, administrativa detaljer.\n– Endast inkludera värden (t.ex. labb, blodtryck) om de är kliniskt relevanta.\n– Inga slutsatser utanför det som stöds av underlaget.\n\nSlutlig sektion: Läkemedelsinteraktioner (med risknivåer och totalbedömning)\n\n⚠️ LÄKEMEDELSINTERAKTIONER:\nAnalysera om det förekommer kombinationer av läkemedel som kan ge kliniskt relevanta interaktioner enligt farmakologisk praxis (t.ex. CYP-hämning, hypoglykemi, hyperkalemi, QT-förlängning, blödningsrisk etc).\n\nOm interaktioner identifieras, ange dem i punktform enligt följande risknivåer:\n\n🔴 ALLVARLIG INTERAKTION – kliniskt betydande, kräver åtgärd eller undvikande.\n\n🟠 MÅTTLIG INTERAKTION – kliniskt relevant, kräver uppföljning eller dosjustering.\n\n🟢 LINDRIG INTERAKTION – av mindre klinisk betydelse men värd att känna till.\n\nExempel:\n🔴 Samtidig behandling med warfarin och NSAID – risk för ökad blödningsbenägenhet.\n🟠 Metformin i kombination med ACE-hämmare – risk för sänkt glukosnivå, observera hypoglykemi.\n🟢 Omeprazol och sertralin – möjlig mild farmakokinetisk interaktion utan klinisk betydelse.\n\nOm inga relevanta interaktioner noteras:\n✅ INGA KLINISKT BETYDANDE INTERAKTIONER IDENTIFIERADE.\n\nSamlad bedömning av interaktionsrisk:\nBedöm den övergripande risknivån utifrån de identifierade interaktionerna och markera den på en egen rad längst ned, följt av en kort kommentar anpassad efter risknivå:\n\n🔴 HÖG SAMLAD INTERAKTIONSRISK – flera allvarliga interaktioner.\n💬 Kommentar: Kräver klinisk åtgärd, justering eller noggrann uppföljning rekommenderas.\n\n🟠 MÅTTLIG SAMLAD INTERAKTIONSRISK – enstaka relevanta interaktioner.\n💬 Kommentar: Uppföljning eller dosanpassning bör övervägas.\n\n🟢 LÅG SAMLAD INTERAKTIONSRISK – inga eller endast lindriga interaktioner.\n💬 Kommentar: Ingen särskild åtgärd krävs, behandling kan fortsätta enligt plan.\n\nExempel på format:\n\n🩺 2023-02-14: NYBESÖK\n• Kontakt gällande typ 2-diabetes och hypertoni.\n• Behandling påbörjad med metformin och ACE-hämmare.\n\n🔄 2023-06-20: ÅTERBESÖK\n• Uppföljning visade god glukoskontroll och stabilt blodtryck.\n\n📞 2023-11-05: TELEFONKONTAKT\n• Periodvis trötthet rapporterad, inga nytillkomna symtom.\n• Ingen justering av medicinering bedömd nödvändig.\n\n🧪 2024-04-12: LABBSVAR\n• Njur- och leverfunktion fortsatt stabila.\n\n💊 2025-07-31: RECEPTFÖRNYELSE\n• Patienten önskar fortsatt behandling med metformin.\n• Recept förnyat enligt tidigare ordination.\n\n🔄 2024-09-01: UPPFÖLJNING\n• Ingen ny medicinering eller komplikation noterad.\n\n⚠️ LÄKEMEDELSINTERAKTIONER:\n✅ INGA KLINISKT BETYDANDE INTERAKTIONER IDENTIFIERADE.\n\n🟢 LÅG SAMLAD INTERAKTIONSRISK\n💬 Kommentar: Ingen särskild åtgärd krävs.",
+      "createdAt": "2025-11-03T13:37:01.190Z",
+      "id": "mhj6p7nqvdxk70d0eu",
+      "name": "WebDoc - Sammanfatta Journal",
+      "updatedAt": "2025-11-03T13:37:01.190Z"
+    },
+    {
+      "content": "PROMPT:\n\nExtrahera endast personnumret ur följande text.\nOm personnumret skrivs utan bindestreck, lägg automatiskt till ett bindestreck mellan födelsedatum och de fyra sista siffrorna.\nFormatet ska alltid vara YYYYMMDD-XXXX.\nSkriv ut endast personnumret som ren text (utan tecken, rubriker eller förklaringar).\nOm inget personnummer finns, skriv ingenting.\n\nExempel:\n\nINDATA:\n\n197802154321\n\nAnna Kristina Bergström  \nStorgatan 12  \n90325 Umeå  \n0701234567  \nanna.bergstrom@example.com\n\n\nUTDATA:\n\n19780215-4321",
+      "createdAt": "2025-11-03T13:37:01.195Z",
+      "id": "mhj6p7nvqgg3fo7xhvn",
+      "name": "Curoflow - Öppna patient i WebDoc",
+      "updatedAt": "2025-11-03T13:37:01.195Z"
+    }
+  ],
+  "comblies": [
+    {
+      "createdAt": "2025-11-03T13:37:01.240Z",
+      "id": "mhj6p7p4g7ep66b68eg",
+      "inputSelectors": [
+        {
+          "description": "input .form-control \"Kontaktorsak\"",
+          "elementType": "text",
+          "isInput": true,
+          "label": "Kontaktorsak",
+          "placeholder": "",
+          "selector": "input[type='text']",
+          "tagName": "input",
+          "textContent": "➡️ Återbesök/Behandlingsråd",
+          "xpath": "(//input[contains(@class, 'form-control')])[2]"
+        },
+        {
+          "description": "textarea .form-control \"Anamnes\"",
+          "elementType": "textarea",
+          "isInput": true,
+          "label": "Anamnes",
+          "placeholder": "",
+          "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(5) > :nth-child(2) > :nth-child(2) > :nth-child(2)",
+          "tagName": "textarea",
+          "textContent": "🔹 Önskar råd om läkemedelsdosering. \n\n\n• Pat står på Ozempic 0.25mg. \n❓ Pat fråga om dosering: Känns som det är dags att höja dosen, kört på 0,25 mg i 6 mån. Och tycker jag har fått tillbaka lite av hunger känslorna och stått still på vågen i några veckor. . \n\nPatientens längd: 170, vikt: 79.4, BMI: 27.5. \n\n💪 Patientens WellgoCoach heter Cecilia Wahlgren . ",
+          "xpath": "(//textarea[contains(@class, 'form-control')])[1]"
+        },
+        {
+          "description": "div .chat-context-menu.chat-context-menu-right",
+          "elementType": "div",
+          "isInput": true,
+          "label": "",
+          "placeholder": "",
+          "selector": "div.chat-context-menu.chat-context-menu-right",
+          "tagName": "div",
+          "textContent": "",
+          "xpath": "//div[@class=\"messages\"]//div[not(contains(@class, \"journal\")) and not(.//div) and not(contains(@class, \"username\"))]"
+        }
+      ],
+      "isActive": true,
+      "name": "Bedömning",
+      "outputSelector": {
+        "description": "textarea .form-control \"Bedömning\"",
+        "elementType": "textarea",
+        "isInput": true,
+        "label": "Bedömning",
+        "placeholder": "",
+        "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(5) > :nth-child(2) > :nth-child(3) > :nth-child(2)",
+        "tagName": "textarea",
+        "textContent": "",
+        "xpath": "(//textarea[contains(@class, 'form-control')])[2]"
+      },
+      "pageDomain": "dashboard.curoflow.se",
+      "pageOrigin": "https://dashboard.curoflow.se",
+      "promptId": "mhj6p7n4qaljh66b7xg",
+      "updatedAt": "2025-11-03T13:37:01.240Z"
+    },
+    {
+      "createdAt": "2025-11-03T13:37:01.252Z",
+      "id": "mhj6p7pgt0cw9rlmnuf",
+      "inputSelectors": [
+        {
+          "description": "input .form-control \"Kontaktorsak\"",
+          "elementType": "text",
+          "isInput": true,
+          "label": "Kontaktorsak",
+          "placeholder": "",
+          "selector": "input[type='text']",
+          "tagName": "input",
+          "textContent": "➡️ Återbesök/Behandlingsråd",
+          "xpath": "(//input[contains(@class, 'form-control')])[2]"
+        },
+        {
+          "description": "textarea .form-control \"Anamnes\"",
+          "elementType": "textarea",
+          "isInput": true,
+          "label": "Anamnes",
+          "placeholder": "",
+          "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(5) > :nth-child(2) > :nth-child(2) > :nth-child(2)",
+          "tagName": "textarea",
+          "textContent": "🔹 Önskar råd om läkemedelsdosering. \n\n\n• Pat står på Ozempic 0.25mg. \n❓ Pat fråga om dosering: Känns som det är dags att höja dosen, kört på 0,25 mg i 6 mån. Och tycker jag har fått tillbaka lite av hunger känslorna och stått still på vågen i några veckor. . \n\nPatientens längd: 170, vikt: 79.4, BMI: 27.5. \n\n💪 Patientens WellgoCoach heter Cecilia Wahlgren . ",
+          "xpath": "(//textarea[contains(@class, 'form-control')])[1]"
+        },
+        {
+          "description": "textarea .form-control \"Bedömning\"",
+          "elementType": "textarea",
+          "isInput": true,
+          "label": "Bedömning",
+          "placeholder": "",
+          "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(5) > :nth-child(2) > :nth-child(3) > :nth-child(2)",
+          "tagName": "textarea",
+          "textContent": "",
+          "xpath": "(//textarea[contains(@class, 'form-control')])[2]"
+        },
+        {
+          "description": "div .chat-context-menu.chat-context-menu-right",
+          "elementType": "div",
+          "isInput": true,
+          "label": "",
+          "placeholder": "",
+          "selector": "div.chat-context-menu.chat-context-menu-right",
+          "tagName": "div",
+          "textContent": "",
+          "xpath": "//div[@class=\"messages\"]//div[not(contains(@class, \"journal\")) and not(.//div) and not(contains(@class, \"username\"))]"
+        }
+      ],
+      "isActive": true,
+      "name": "Åtgärd",
+      "outputSelector": {
+        "description": "textarea .form-control \"Åtgärd\"",
+        "elementType": "textarea",
+        "isInput": true,
+        "label": "Åtgärd",
+        "placeholder": "",
+        "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(5) > :nth-child(2) > :nth-child(4) > :nth-child(2)",
+        "tagName": "textarea",
+        "textContent": "",
+        "xpath": "(//textarea[contains(@class, 'form-control')])[3]"
+      },
+      "pageDomain": "dashboard.curoflow.se",
+      "pageOrigin": "https://dashboard.curoflow.se",
+      "promptId": "mhj6p7n607ekxuoheb9r",
+      "updatedAt": "2025-11-03T13:37:01.252Z"
+    },
+    {
+      "createdAt": "2025-11-03T13:37:01.265Z",
+      "id": "mhj6p7pt7m05mmzbzu5",
+      "inputSelectors": [
+        {
+          "description": "input .form-control \"Kontaktorsak\"",
+          "elementType": "text",
+          "isInput": true,
+          "label": "Kontaktorsak",
+          "placeholder": "",
+          "selector": "input[type='text']",
+          "tagName": "input",
+          "textContent": "➡️ Återbesök/Behandlingsråd",
+          "xpath": "(//input[contains(@class, 'form-control')])[2]"
+        },
+        {
+          "description": "textarea .form-control \"Anamnes\"",
+          "elementType": "textarea",
+          "isInput": true,
+          "label": "Anamnes",
+          "placeholder": "",
+          "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(5) > :nth-child(2) > :nth-child(2) > :nth-child(2)",
+          "tagName": "textarea",
+          "textContent": "🔹 Önskar råd om läkemedelsdosering. \n\n\n• Pat står på Ozempic 0.25mg. \n❓ Pat fråga om dosering: Känns som det är dags att höja dosen, kört på 0,25 mg i 6 mån. Och tycker jag har fått tillbaka lite av hunger känslorna och stått still på vågen i några veckor. . \n\nPatientens längd: 170, vikt: 79.4, BMI: 27.5. \n\n💪 Patientens WellgoCoach heter Cecilia Wahlgren . ",
+          "xpath": "(//textarea[contains(@class, 'form-control')])[1]"
+        },
+        {
+          "description": "textarea .form-control \"Bedömning\"",
+          "elementType": "textarea",
+          "isInput": true,
+          "label": "Bedömning",
+          "placeholder": "",
+          "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(5) > :nth-child(2) > :nth-child(3) > :nth-child(2)",
+          "tagName": "textarea",
+          "textContent": "",
+          "xpath": "(//textarea[contains(@class, 'form-control')])[2]"
+        },
+        {
+          "description": "textarea .form-control \"Åtgärd\"",
+          "elementType": "textarea",
+          "isInput": true,
+          "label": "Åtgärd",
+          "placeholder": "",
+          "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(5) > :nth-child(2) > :nth-child(4) > :nth-child(2)",
+          "tagName": "textarea",
+          "textContent": "",
+          "xpath": "(//textarea[contains(@class, 'form-control')])[3]"
+        },
+        {
+          "description": "div .chat-context-menu.chat-context-menu-right",
+          "elementType": "div",
+          "isInput": true,
+          "label": "",
+          "placeholder": "",
+          "selector": "div.chat-context-menu.chat-context-menu-right",
+          "tagName": "div",
+          "textContent": "",
+          "xpath": "//div[@class=\"messages\"]//div[not(contains(@class, \"journal\")) and not(.//div) and not(contains(@class, \"username\"))]"
+        }
+      ],
+      "isActive": true,
+      "name": "WellgoDoc - Chattsvar",
+      "outputSelector": {
+        "description": "textarea #68f3a64c8040b84a575a2f41 .send-message-textarea.form-control \" Skriv ett meddelande...\"",
+        "elementType": "textarea",
+        "isInput": true,
+        "label": " Skriv ett meddelande...",
+        "placeholder": " Skriv ett meddelande...",
+        "selector": "textarea#\\36 8f3a64c8040b84a575a2f41",
+        "tagName": "textarea",
+        "textContent": " Skriv ett meddelande...",
+        "xpath": "//textarea[contains(@class, 'send-message-textarea')]"
+      },
+      "pageDomain": "dashboard.curoflow.se",
+      "pageOrigin": "https://dashboard.curoflow.se",
+      "promptId": "mhj6p7n9t89y8e8b1f7",
+      "updatedAt": "2025-11-03T13:37:01.265Z"
+    }
+  ],
+  "combos": [
+    {
+      "comblieIds": [
+        "mhj6p7p4g7ep66b68eg",
+        "mhj6p7pgt0cw9rlmnuf"
+      ],
+      "createdAt": "2025-11-03T13:37:01.278Z",
+      "executionOrder": [
+        0,
+        1
+      ],
+      "id": "mhj6p7q6i23br36s2k",
+      "isActive": true,
+      "name": "Bedömning + Åtgärd",
+      "pageDomain": "dashboard.curoflow.se",
+      "pageOrigin": "https://dashboard.curoflow.se",
+      "updatedAt": "2025-11-03T13:37:01.278Z"
+    }
+  ],
+  "workflows": [
+    {
+      "connections": [
+        {
+          "connectionType": "direct",
+          "sourceElementId": "input-1",
+          "targetElementId": "process-2"
+        },
+        {
+          "connectionType": "direct",
+          "sourceElementId": "process-2",
+          "targetElementId": "output-3"
+        }
+      ],
+      "createdAt": "2025-11-03T13:37:01.346Z",
+      "description": "",
+      "elements": [
+        {
+          "id": "input-1",
+          "inputConfig": {
+            "type": "text"
+          },
+          "inputConnections": [],
+          "inputSelector": {
+            "description": "div #main",
+            "elementType": "div",
+            "isInput": false,
+            "label": "",
+            "placeholder": "",
+            "selector": "div#main",
+            "tagName": "div",
+            "textContent": "onLoadJournalOverview(\"Filtrera på sökord\",\"Filtrera på vårdgivare\",\"Filtrera på journalformulär\");\n\t\tJournalöversikt\n\t\t\n\t\t\n\t\t\n\t\t\n\t\tJournaler för 19121212-1212: \n\t\t\n\t\t\t \n\t\t\t\n\t\t\n\t\t\tAdministrationCF journalFiltrera på journalformulärJohan EmiusFiltrera på vårdgivare\n\t\t\n\t\t\t \n\t\t\t\n\t\tAnamnesAnteckningBedömningDiagnosKontaktorsakStatusÅtgärdFiltrera på sökord\n\t\t\n\t\t    \n\t\t    \n\t\t    \n\t\t    Visa alla sökord\n\t\t\n\t\t\n\t\t\n\t\t\n\t\t\n        \n    \n        \n                \n                    Wellgo.se | 2025-10-26 |\n                    Läkare Johan Emius |\n                    Administration \n                \n\n            \n        \n\n\n    \nAnteckning:Pat har haft ont i magen men det släppte med movicol som patienten tog under 3 dagars tid.Diagnos:K58.2 Irritabel tarm som domineras av förstoppning\n    \n        \n                \n                    Wellgo.se | 2024-01-05 |\n                    Läkare Johan Emius |\n                    CF journal \n                \n\n            \n        \n\n\n    \nKontaktorsak:testAnamnes:testBedömning:testÅtgärd:testDiagnos:E66.0 Fetma orsakad av kaloriöverskott\n    \n        \n                \n                    Wellgo.se | 2023-12-01 |\n                    Läkare Johan Emius |\n                    CF journal \n                \n\n            \n        \n\n\n    \nKontaktorsak:FetmaStatus:sdfgfdgAnamnes:test \nsdfsdfBedömning:bedÅtgärd:åtgDiagnos:E66.0 Fetma orsakad av kaloriöverskott",
+            "xpath": "//div[@name=\"main\"]"
+          },
+          "name": "Input 1",
+          "position": {
+            "x": -4,
+            "y": 59
+          },
+          "type": "input",
+          "waitForLoad": true
+        },
+        {
+          "id": "process-2",
+          "inputConnections": [],
+          "linkedPromptId": "mhgcd78jmg3bjlbtuy",
+          "name": "Sammanfattning Journalöversikt",
+          "position": {
+            "x": 211.5,
+            "y": 73
+          },
+          "promptId": "mhj6p7nqvdxk70d0eu",
+          "systemPrompt": "",
+          "type": "prompt",
+          "userPrompt": "",
+          "waitForLoad": true
+        },
+        {
+          "id": "output-3",
+          "inputConnections": [],
+          "name": "Output 3",
+          "outputConfig": {
+            "clearBeforeWrite": true,
+            "type": "popup"
+          },
+          "outputSelector": null,
+          "position": {
+            "x": 551.1999999999998,
+            "y": 52.480000000000075
+          },
+          "type": "output",
+          "waitForLoad": true
+        }
+      ],
+      "id": "mhj6p7s2m8v87hhk91",
+      "isActive": true,
+      "name": "WebDoc - Sammanfatta journalöversikt",
+      "pageDomain": "webdoc.atlan.se",
+      "pageOrigin": "https://webdoc.atlan.se",
+      "updatedAt": "2025-11-03T13:37:01.346Z"
+    },
+    {
+      "connections": [
+        {
+          "connectionType": "direct",
+          "sourceElementId": "input-1",
+          "targetElementId": "process-2"
+        },
+        {
+          "connectionType": "direct",
+          "sourceElementId": "process-2",
+          "targetElementId": "output-3"
+        },
+        {
+          "connectionType": "direct",
+          "sourceElementId": "output-3",
+          "targetElementId": "action-4"
+        },
+        {
+          "connectionType": "direct",
+          "sourceElementId": "action-4",
+          "targetElementId": "action-5"
+        }
+      ],
+      "createdAt": "2025-11-03T13:37:01.362Z",
+      "description": "",
+      "elements": [
+        {
+          "id": "input-1",
+          "inputConnections": [],
+          "inputSelector": {
+            "description": "p",
+            "elementType": "p",
+            "isInput": false,
+            "label": "",
+            "placeholder": "",
+            "selector": ":root > :nth-child(2) > :nth-child(12) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(6) > :nth-child(1)",
+            "tagName": "p",
+            "textContent": "196506013900Eva Gunilla KullensteinPriorsgatan 5021617 Limhamn0046708240333eva@kullenstein.com",
+            "xpath": "(//div[contains(@class, 'modal-body')]//p)[5]"
+          },
+          "name": "Input 1",
+          "position": {
+            "x": -204.4559999999999,
+            "y": 23.672000000000025
+          },
+          "type": "input"
+        },
+        {
+          "id": "process-2",
+          "inputConnections": [],
+          "linkedPromptId": "mhgcd78nrnwub93lhod",
+          "name": "Process 2",
+          "position": {
+            "x": 1.1680000000000064,
+            "y": 37.792
+          },
+          "promptId": "mhj6p7nvqgg3fo7xhvn",
+          "systemPrompt": "",
+          "type": "prompt",
+          "userPrompt": "",
+          "waitForLoad": true
+        },
+        {
+          "id": "output-3",
+          "inputConnections": [],
+          "name": "Output 3",
+          "outputConfig": {
+            "clearBeforeWrite": true,
+            "type": "text"
+          },
+          "outputSelector": {
+            "description": "input #searchText .searchInputLeftMenu \"Sök patient\"",
+            "elementType": "text",
+            "isInput": true,
+            "label": "Sök patient",
+            "placeholder": "Sök patient",
+            "selector": "input#searchText",
+            "tagName": "input",
+            "textContent": "Sök patient",
+            "xpath": "//input[@placeholder=\"Sök patient\"]"
+          },
+          "position": {
+            "x": 403.4559999999999,
+            "y": 28.28800000000001
+          },
+          "type": "output",
+          "waitForLoad": true,
+          "websiteUrl": "https://webdoc.atlan.se/#"
+        },
+        {
+          "actionConfig": {
+            "className": "",
+            "continueOnError": false,
+            "fillType": "text",
+            "fillValue": "",
+            "keys": "Ente",
+            "maxWaitTime": 10000,
+            "navigationType": "navigate",
+            "scrollAmount": 300,
+            "scrollBehavior": "auto",
+            "scrollDirection": "down",
+            "scrollType": "element",
+            "stateAction": "show",
+            "targetSelector": null,
+            "text": "",
+            "type": "keyboard",
+            "url": "",
+            "waitAfterAction": 0,
+            "waitTime": 1000,
+            "waitType": "time"
+          },
+          "id": "action-4",
+          "inputConnections": [],
+          "name": "Action 4",
+          "position": {
+            "x": 679.9421109127588,
+            "y": 54.583339875152205
+          },
+          "type": "action"
+        },
+        {
+          "actionConfig": {
+            "className": "",
+            "continueOnError": false,
+            "fillType": "text",
+            "fillValue": "",
+            "keys": "Enter",
+            "maxWaitTime": 10000,
+            "navigationType": "navigate",
+            "scrollAmount": 300,
+            "scrollBehavior": "auto",
+            "scrollDirection": "down",
+            "scrollType": "element",
+            "stateAction": "show",
+            "targetSelector": null,
+            "text": "",
+            "type": "keyboard",
+            "url": "",
+            "waitAfterAction": 0,
+            "waitTime": 1000,
+            "waitType": "time"
+          },
+          "id": "action-5",
+          "inputConnections": [],
+          "name": "Action 5",
+          "position": {
+            "x": 940.9606134401645,
+            "y": 45.7523226286541
+          },
+          "type": "action"
+        }
+      ],
+      "id": "mhj6p7siw6vly72p2u",
+      "isActive": true,
+      "name": "Curoflow ➡️ WebDoc Öppna patient",
+      "pageDomain": "dashboard.curoflow.se",
+      "pageOrigin": "https://dashboard.curoflow.se",
+      "updatedAt": "2025-11-03T13:37:01.362Z"
+    },
+    {
+      "connections": [
+        {
+          "connectionType": "direct",
+          "sourceElementId": "input-1",
+          "targetElementId": "process-2"
+        },
+        {
+          "connectionType": "direct",
+          "sourceElementId": "process-2",
+          "targetElementId": "output-3"
+        },
+        {
+          "connectionType": "direct",
+          "sourceElementId": "output-3",
+          "targetElementId": "action-4"
+        }
+      ],
+      "createdAt": "2025-11-03T13:37:01.378Z",
+      "description": "",
+      "elements": [
+        {
+          "actionConfig": {
+            "targetSelector": null,
+            "type": "click"
+          },
+          "id": "input-1",
+          "inputConfig": {
+            "type": "text"
+          },
+          "inputConnections": [],
+          "inputSelector": {
+            "description": "p",
+            "elementType": "p",
+            "isInput": false,
+            "label": "",
+            "placeholder": "",
+            "selector": ":root > :nth-child(2) > :nth-child(2) > :nth-child(1) > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(3) > :nth-child(2) > :nth-child(2) > :nth-child(6) > :nth-child(1)",
+            "tagName": "p",
+            "textContent": "199106230445TANYA MOHAMMEDZADEHÅrstaskogs väg 9a11756 Stockholm 0046762862377tanya.mohammedzadeh@gmail.com",
+            "xpath": "(//div[contains(@class, 'chat-referral-preview-body')]//p)[5]"
+          },
+          "name": "Input 1",
+          "position": {
+            "x": 100,
+            "y": 100
+          },
+          "type": "input",
+          "waitForLoad": true
+        },
+        {
+          "actionConfig": {
+            "targetSelector": null,
+            "type": "click"
+          },
+          "id": "process-2",
+          "inputConnections": [],
+          "linkedPromptId": "mhiwk3dx8es8h4wbavx",
+          "name": "Process 2",
+          "position": {
+            "x": 391.4881203007519,
+            "y": 93.56872180451126
+          },
+          "promptId": "mhj6p7nvqgg3fo7xhvn",
+          "systemPrompt": "",
+          "type": "prompt",
+          "userPrompt": "",
+          "waitForLoad": true
+        },
+        {
+          "actionConfig": {
+            "targetSelector": null,
+            "type": "click"
+          },
+          "id": "output-3",
+          "inputConnections": [],
+          "name": "Output 3",
+          "outputConfig": {
+            "clearBeforeWrite": true,
+            "type": "text"
+          },
+          "outputSelector": {
+            "description": "input #searchText .searchInputLeftMenu \"Sök patient\"",
+            "elementType": "text",
+            "isInput": true,
+            "label": "Sök patient",
+            "placeholder": "Sök patient",
+            "selector": "input#searchText",
+            "tagName": "input",
+            "textContent": "Sök patient",
+            "xpath": "//input[@placeholder=\"Sök patient\"]"
+          },
+          "position": {
+            "x": 732.275881122958,
+            "y": 61.002996357058066
+          },
+          "type": "output",
+          "waitForLoad": true,
+          "websiteUrl": "https://webdoc.atlan.se/#"
+        },
+        {
+          "actionConfig": {
+            "className": "",
+            "continueOnError": false,
+            "fillType": "text",
+            "fillValue": "",
+            "keys": "Enter",
+            "maxWaitTime": 10000,
+            "navigationType": "navigate",
+            "scrollAmount": 300,
+            "scrollBehavior": "auto",
+            "scrollDirection": "down",
+            "scrollType": "element",
+            "stateAction": "show",
+            "targetSelector": null,
+            "text": "",
+            "type": "keyboard",
+            "url": "",
+            "waitAfterAction": 0,
+            "waitTime": 1000,
+            "waitType": "time"
+          },
+          "id": "action-4",
+          "inputConnections": [],
+          "name": "Action 4",
+          "position": {
+            "x": 980.2337904982793,
+            "y": 95.66875528298158
+          },
+          "type": "action"
+        }
+      ],
+      "id": "mhj6p7syi9l0eku2w8",
+      "isActive": true,
+      "name": "Curoflow Chatt Förhandsgranska - Visa patient i WebDoc",
+      "pageDomain": "dashboard.curoflow.se",
+      "pageOrigin": "https://dashboard.curoflow.se",
+      "updatedAt": "2025-11-03T13:37:01.378Z"
+    }
+  ]
+}
